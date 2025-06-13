@@ -4,13 +4,13 @@ import pybullet_data
 import numpy as np
 import matplotlib.pyplot as plt
 
-gui_flag = True
-# gui_flag = False
+# gui_flag = True
+gui_flag = False
 
 dt = 1/240      # simulation time step [seconds]
 th0 = 0.1       # starting position [rad]
-th_targ = 1.0   # desired position [rad]
-T = 3.25        # total time to reach desired position [seconds]
+th_targ = 1.2   # desired position [rad]
+T = 3.2         # total time to reach desired position [seconds]
 
 g = 9.81    # [m/s^2]
 L = 0.8     # [m]
@@ -152,11 +152,11 @@ for idx, t in enumerate(log_time):
 p.disconnect()
 
 # plotting results
-fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, figsize=(12, 10))
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
 
 # position tracking
-ax1.plot(log_time, log_theta_sim, 'b-', label='actual Position', linewidth=2)
-ax1.plot(log_time, log_theta_desired, 'r--', label='desired Position', linewidth=2)
+ax1.plot(log_time, log_theta_sim, 'b-', label='actual pos', linewidth=2)
+ax1.plot(log_time, log_theta_desired, 'r--', label='desired pos', linewidth=2)
 ax1.axvline(x=T, color='k', linestyle=':', alpha=0.7, label=f'target Time ({T}s)')
 ax1.set_ylabel('position (rad)')
 ax1.set_title('position tracking with 5-ord pol traj')
@@ -171,23 +171,6 @@ ax2.set_ylabel('velocity [rad/s]')
 ax2.set_title('velocity tracking')
 ax2.grid(True, alpha=0.3)
 ax2.legend()
-
-# control input (torque)
-ax3.plot(log_time, log_tau_sim, 'g-', label='control torque', linewidth=2)
-ax3.axvline(x=T, color='k', linestyle=':', alpha=0.7)
-ax3.set_ylabel('torque [N*m]')
-ax3.set_title('control input')
-ax3.grid(True, alpha=0.3)
-ax3.legend()
-
-# desired acceleration (for reference)
-ax4.plot(log_time, log_acc_desired, 'm-', label='Desired Acceleration', linewidth=2)
-ax4.axvline(x=T, color='k', linestyle=':', alpha=0.7)
-ax4.set_ylabel('acceleration [rad/s^2]')
-ax4.set_xlabel('time [s]')
-ax4.set_title('desired acceleration')
-ax4.grid(True, alpha=0.3)
-ax4.legend()
 
 plt.tight_layout()
 plt.show()

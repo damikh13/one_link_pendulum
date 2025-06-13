@@ -164,8 +164,8 @@ ax1.grid(True, alpha=0.3)
 ax1.legend()
 
 # velocity tracking
-ax2.plot(log_time, log_vel_sim, 'b-', label='actual Velocity', linewidth=2)
-ax2.plot(log_time, log_vel_desired, 'r--', label='desired Velocity', linewidth=2)
+ax2.plot(log_time, log_vel_sim, 'b-', label='actual vel', linewidth=2)
+ax2.plot(log_time, log_vel_desired, 'r--', label='desired vel', linewidth=2)
 ax2.axvline(x=T, color='k', linestyle=':', alpha=0.7)
 ax2.set_ylabel('velocity [rad/s]')
 ax2.set_title('velocity tracking')
